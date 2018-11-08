@@ -11,3 +11,7 @@ button:focus {
 .navbar .dropdown-menu .form-control {
     width: 200px;
 }
+
+#loginFormDropdown {
+  width: 300px;
+}
