@@ -2,6 +2,7 @@
 $(document).ready(function(){
 
   let $passwordInput = $("#passwordInput");
+  let $emailInput = $("#emailInput");
   let $showHidePassword = $("#showHidePassword");
   let $eyeCon = $("#eyeCon");
   let $loginButton = $("#loginFormSubmitButton");
@@ -30,9 +31,22 @@ $(document).ready(function(){
   // when the Login form button is clicked,
   $loginButton.on('click', function(event) {
 
+    // get the email & pwd from the login form
+    let email = $emailInput.val();
     let password = $passwordInput.val();
-    console.log(password);
+
+    // create a data object to post to the server
+    let loginData = {}
+    loginData.email = email;
+    loginData.password = password;
+
+    // post the data to our php side server
+    $.post('login.php', loginData, function(data, status, xhr) {
+
+        // check for errors
+    });
 
   });
+
 
 });
