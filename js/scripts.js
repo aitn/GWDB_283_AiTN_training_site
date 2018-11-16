@@ -20,11 +20,11 @@ $(document).ready(function(){
 
   // when the Login form button is clicked,
   $loginButton.on('click', function(event) {
-    handleLoginButtonClick(data);
+    handleLoginButtonClick(event);
   });
 
   function handleShowPasswordButtonClick(event) {
-    
+
     event.preventDefault();
 
     if ($passwordInput.attr("type") == "password") {
@@ -40,23 +40,43 @@ $(document).ready(function(){
 
   function handleLoginButtonClick(event) {
 
+    event.preventDefault();
+
     // get the email & pwd from the login form
     let email = $emailInput.val();
     let password = $passwordInput.val();
 
-    // create a data object to post to the server
-    let loginData = {}
-    loginData.email = email;
-    loginData.password = password;
-
     // before we post the data, we should do a little validation
     // and at least make sure the user entered something
 
-    // post the data to our php side server
-    $.post('login.php', loginData, function(data, status, xhr) {
+    // if the users have entered nothing, we have to let them know. . .
+    if (email == "" || password == "") {
 
-        // check for errors
-    });
+      // move the focus to the empty element and HTML will do the Reset
+      if (email == "")$emailInput.focus();
+      else $passwordInput.focus();
+
+      return;
+
+    } else {
+
+      // create a data object to post to the server
+      let loginData = {}
+      loginData.email = email;
+      loginData.password = password;
+
+      // post the data to our php side server
+      $.post('login.php', loginData, function(data, status, xhr) {
+          // check for errors
+          handleLoginPostRequest(data, status, xhr);
+      });
+
+    }
+
+  }
+
+  function handleLoginPostRequest(data, status, xhr) {
+    console.log(data);
   }
 
 });
