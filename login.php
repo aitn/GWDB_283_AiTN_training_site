@@ -1,15 +1,21 @@
 <?php
 
-echo "hullo \r\n \r\n ";
+include_once("helpers.php");
 
-printr($_GET);
+echo returnJSON($_POST);
 
-function printr($string) {
-
-  echo '<pre>';
-  print_r($string);
-  echo '</pre>';
+function formatReturnData($data) {
 
 }
+
+function returnJSON($returnData) {
+
+  return json_encode($returnData);
+
+}
+
+// first we need to validate the incomming data a little more betterer
+
+// then if it's valid, we need to query the DB and make sure the passwords match
 
  ?>

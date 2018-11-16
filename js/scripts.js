@@ -10,7 +10,7 @@ $(document).ready(function(){
   let $loginDropdownButton = $("#dropdownMenu1");
 
   $loginDropdownButton.on('click', function(event) {
-    console.log("click");
+    // do something
   });
 
   // show and hide the password field when the eye icon is clicked
