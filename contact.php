@@ -13,7 +13,7 @@
 
 <p class="welcome">CONTACT MEH</p>
 
-<form id="contact-form" method="post" action="contact.php" role="form">
+<form id="contact-form" method="post" action="contact-form.php" role="form">
 
     <div class="messages"></div>
 
@@ -43,6 +43,7 @@
                     <div class="help-block with-errors"></div>
                 </div>
             </div>
+            <!--
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_need">Please specify your need *</label>
@@ -56,6 +57,7 @@
                     <div class="help-block with-errors"></div>
                 </div>
             </div>
+            -->
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -80,7 +82,7 @@
 
 </form>
 
-    </section>
+</section>
 
 <?php
 
