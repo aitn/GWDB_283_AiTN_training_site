@@ -4,46 +4,47 @@
  * register.php
  */
 
- @include_once("head.php");
+// DataBase connection info
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "test";
 
- @include_once("header.php");
+// receive incoming data from $_POST
 
- ?>
 
-<section id="content">
+// create a hash of their password with their email as a salt
+$hashedPassword = crypt($_POST['email'], $_POST['password']);
 
-<p class="welcome">REGISTER AN ACCOUNT</p>
+// create a connection to the DB,
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected successfully ";
+}
+catch(PDOException $e)
+{
+  echo "Connection failed: " . $e->getMessage();
+}
 
- <form id="registerForm" class="form" role="form">
+// pass in a SQL query to store the relevant user data
+try {
+  $sql = "INSERT INTO users (email, password)
+    VALUES ('{$_POST['email']}', '{$hashedPassword}')";
 
-    <div class="form-group">
-        <input id="emailInput" placeholder="Email" class="form-control form-control-sm" type="text" required="" pattern="\S+@\S+\.\S+">
-        <input id="emailInputMatch" placeholder="Email Again" class="form-control form-control-sm" type="text" required="" pattern="\S+@\S+\.\S+">
-    </div>
+  // use exec() because no results are returned
+  $conn->exec($sql);
 
-    <div class="form-group">
-      <div class="input-group mb-3">
-        <input id="passwordInput" placeholder="Password" class="form-control form-control-sm" type="password" required="">
-        <input id="passwordInputMatch" placeholder="Password Again" class="form-control form-control-sm" type="password" required="">
-        <div class="input-group-append">
-          <a id="showHidePassword" href=""><i id="eyeCon" class="input-group-text fa fa-eye-slash"></i></a>
-        </div>
-      </div>
-    </div>
+  echo "New User created successfully ";
 
-    <div class="form-group">
-        <button id="registerFormSubmitButton" type="submit" class="btn btn-primary btn-block">Register Account</button>
-    </div>
+  // add logic to send confirmation email to user.
 
-    <div class="form-group text-center">
-        <small><a href="#" data-toggle="modal" data-target="#modalPassword">Forgot password?</a></small>
-    </div>
-</form>
+}
+catch(PDOException $e)
+{
+  echo $sql . "<br>" . $e->getMessage();
+}
 
-</section>
-
-<?php
-
-@include_once("footer.php");
 
  ?>
