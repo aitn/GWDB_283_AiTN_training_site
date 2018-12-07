@@ -8,6 +8,7 @@ $(document).ready(function(){
   let $loginButton = $("#loginFormSubmitButton");
 
   let $loginDropdownButton = $("#dropdownMenu1");
+  let $loginMessage = $("#loginMessage");
 
   $loginDropdownButton.on('click', function(event) {
     // do something
@@ -77,6 +78,12 @@ $(document).ready(function(){
 
   function handleLoginPostRequest(data, status, xhr) {
     console.log(data);
+
+    $loginMessage.text(data);
+    // so when this comes back positive, from the user having logged in,
+    // you'll need to update the UI, remove the register and login buttons,
+    // and display some kind of username of profile pic in that area,
+    // along with a link to log out.
   }
 
 });

@@ -54,6 +54,7 @@
 
                     <div class="form-group text-center">
                       <small><a href="#" data-toggle="modal" data-target="#modalPassword">Forgot password?</a></small>
+                      <div id="loginMessage"></div>
                     </div>
                   </form>
                 </li>
